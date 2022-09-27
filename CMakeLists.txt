@@ -27,7 +27,7 @@ add_executable(${PROJECT_NAME} ${APP_SRC_FILES})
 set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/app)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(${PROJECT_NAME} pthread c++ ${CMAKE_SOURCE_DIR}/lib/libverifier.so)
+target_link_libraries(${PROJECT_NAME} pthread c++ ${CMAKE_SOURCE_DIR}/lib/${CMAKE_SYSTEM_PROCESSOR}/libverifier.so)
 
 
 project(a.out.gtest)
@@ -39,5 +39,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES COMPILE_FLAGS ${COMPILE_FLAGS})
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/app)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/gtest)
 target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/include)
-target_link_libraries(${PROJECT_NAME} pthread c++ ${CMAKE_SOURCE_DIR}/lib/libverifier.so gtest gtest_main)
+target_link_libraries(${PROJECT_NAME} pthread c++ ${CMAKE_SOURCE_DIR}/lib/${CMAKE_SYSTEM_PROCESSOR}/libverifier.so gtest gtest_main)
 
