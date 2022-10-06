@@ -22,4 +22,4 @@ std::unordered_set<char> removeDuplcateChar(const std::string &s1, const std::st
 bool puzzleSolver(std::string s1, std::string s2, std::string s3, std::unordered_map<char, unsigned> & mapping);
 
 
-#endifls
+#endif
