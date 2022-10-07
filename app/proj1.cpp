@@ -2,7 +2,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
-unsigned getStrNum(const std::string &str, const std::unordered_map<char, unsigned> & mapping)
+unsigned getStrNum(const std::string &str, const std::unordered_map<char, unsigned> &mapping)
 {
 	if(str.empty()) return 0;
 	unsigned strNum = 0;
@@ -15,12 +15,12 @@ unsigned getStrNum(const std::string &str, const std::unordered_map<char, unsign
 	return strNum;
 }
 
-bool verifySolution(std::string s1, std::string s2, std::string s3, const std::unordered_map<char, unsigned> &mapping)
+bool verifySolution(const std::string &s1, const std::string &s2, const std::string &s3, const std::unordered_map<char, unsigned> &mapping)
 {
 	return getStrNum(s1, mapping) + getStrNum(s2, mapping) == getStrNum(s3, mapping);
 }
 
-void backTracking(const std::string &s1, const std::string &s2, const std::string &s3, std::unordered_map<char, unsigned> &mapping, std::unordered_set<char> letters, std::unordered_set<char>::iterator itor, bool visited[10], bool &result)
+void backTracking(const std::string &s1, const std::string &s2, const std::string &s3, std::unordered_map<char, unsigned> &mapping, const std::unordered_set<char> &letters, std::unordered_set<char>::iterator itor, bool visited[10], bool &result)
 { 
 	if(itor == letters.end())
 	{
@@ -28,16 +28,13 @@ void backTracking(const std::string &s1, const std::string &s2, const std::strin
 			result = true;
 		return;
 	}
-	for(size_t i = 0; i <= 9; ++i)
+	for(unsigned i = 0; i <= 9; ++i)
 	{
 		if(visited[i] == true) continue;
 		mapping[*itor] = i;
 		visited[i] = true;
-		auto previous = itor;
-		++itor;
-		backTracking(s1, s2, s3, mapping, letters, itor, visited, result);
+		backTracking(s1, s2, s3, mapping, letters, std::next(itor), visited, result);
 		if(result) return;
-		itor = previous;
 		visited[i] = false;
 	}
 }
@@ -58,7 +55,7 @@ bool puzzleSolver(std::string s1, std::string s2, std::string s3, std::unordered
 {
 	bool visited[10];
 	bool result = false;
-	std::unordered_set<char> letters = removeDuplcateChar(s1, s2, s3);
+	const std::unordered_set<char> letters = removeDuplcateChar(s1, s2, s3);
 	for(size_t i = 0; i < 10; ++i)
 		visited[i] = 0;
 	backTracking(s1, s2, s3, mapping, letters, letters.begin(), visited, result);

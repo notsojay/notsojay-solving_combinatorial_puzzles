@@ -15,10 +15,14 @@
  See the project 1 write-up for a better description. 
  */
 
-unsigned getStrNum(const std::string &str, const std::unordered_map<char, unsigned> & mapping);
-bool verifySolution(std::string s1, std::string s2, std::string s3, const std::unordered_map<char, unsigned> &mapping);
-void backTracking(const std::string &s1, const std::string &s2, const std::string &s3, std::unordered_map<char, unsigned> &mapping, std::unordered_set<char> letters, std::unordered_set<char>::iterator itor, bool visited[10], bool &result);
+unsigned getStrNum(const std::string &str, const std::unordered_map<char, unsigned> &mapping);
+
+bool verifySolution(const std::string &s1, const std::string &s2, const std::string &s3, const std::unordered_map<char, unsigned> &mapping);
+
+void backTracking(const std::string &s1, const std::string &s2, const std::string &s3, std::unordered_map<char, unsigned> &mapping, const std::unordered_set<char> &letters, std::unordered_set<char>::iterator itor, bool visited[10], bool &result);
+
 std::unordered_set<char> removeDuplcateChar(const std::string &s1, const std::string &s2, const std::string &s3);
+
 bool puzzleSolver(std::string s1, std::string s2, std::string s3, std::unordered_map<char, unsigned> & mapping);
 
 

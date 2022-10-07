@@ -46,5 +46,52 @@ TEST(SimpleCases, FirstNo){
     EXPECT_FALSE( p1 );
 }
 
+TEST(SimpleCases, First){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("PEACE", "LOVE", "UNITY", puzzle);
+    EXPECT_TRUE( p1 &&  gradeYesAnswer("PEACE", "LOVE", "UNITY", puzzle) );
+}
+
+TEST(SimpleCases, Second){
+        
+    std::unordered_map<char, unsigned> puzzle;
+    
+    bool p1 = puzzleSolver("L", "O", "L", puzzle);
+    EXPECT_TRUE( p1 &&  gradeYesAnswer("L", "O", "L", puzzle) );
+}
+
+TEST(SimpleCases, Third){
+        
+    std::unordered_map<char, unsigned> puzzle;
+    
+    bool p1 = puzzleSolver("JIAHAO", "BAITAO", "YUNHUI", puzzle);
+    EXPECT_TRUE( p1 &&  gradeYesAnswer("JIAHAO", "BAITAO", "YUNHUI", puzzle) );
+}
+
+TEST(SimpleCases, FOUTH){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("PACMAN", "N", "CONTROL", puzzle);
+    EXPECT_TRUE( p1 &&  gradeYesAnswer("PACMAN", "N", "CONTROL", puzzle) );
+}
+
+TEST(SimpleCases, FIFTH){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("OOP", "C", "N", puzzle);
+    EXPECT_TRUE( p1 &&  gradeYesAnswer("OOP", "C", "N", puzzle) );
+}
+
+TEST(SimpleCases, SIXTH){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("AAB", "CDCI", "IRVINE", puzzle);
+    EXPECT_TRUE( p1 &&  gradeYesAnswer("AAB", "CDCI", "IRVINE", puzzle) );
+}
 
 } // end namespace
