@@ -1,63 +1,85 @@
 #include "proj1.hpp"
 #include <unordered_map>
-#include <unordered_set>
+#include <array>
 #include <string>
-unsigned getStrNum(const std::string &str, const std::unordered_map<char, unsigned> &mapping)
+/*
+**		TOP
+**		NAP
+**		---
+**		BIB
+**		The processing order of the backtracking function should be from top to bottom.
+** 		whether T + N is equal to B, O + A is equal to I, and P + P is equal to B.
+**		So the traversal order should be T->N->B->O->A->I->P->P->B.
+*/
+bool backTracking(const std::array<std::string, 2> &strs, const std::string &s3, std::unordered_map<char, unsigned> &mapping, const unsigned &row, const unsigned &col, const unsigned &sum, bool visited[10])
 {
-	if(str.empty()) return 0;
-	unsigned strNum = 0;
-	int exponent = str.size()-1;
-	for(const auto &i : str)
+	if(col >= s3.size())
 	{
-		strNum = (strNum + mapping.at(i));
-		if(exponent--) strNum *= 10;
+		return sum == 0;
 	}
-	return strNum;
+	if(row >= strs.size())
+	{
+		if(mapping.count(s3[col]) && mapping.find(s3[col])->second != 10)
+		{
+			return mapping[s3[col]] != sum % 10 ? false : backTracking(strs, s3, mapping, 0, col+1, sum/10, visited);
+		}
+		else 
+		{
+			if(visited[sum%10] == true) return false;
+			mapping[s3[col]] = sum%10;
+			//std::cout << s3[col] << " " << mapping[s3[col]] << "\n";
+			visited[sum%10] = true;
+			if(backTracking(strs, s3, mapping, 0, col+1, sum/10, visited)) return true;
+			mapping[s3[col]] = 10;
+			visited[sum%10] = false;
+			return false;
+		}
+	}
+	if(col >= strs[row].size())
+	{
+		return backTracking(strs, s3, mapping, row+1, col, sum, visited);
+	}
+	if(mapping.count(strs[row][col]) && mapping.find(strs[row][col])->second != 10)
+	{
+		return backTracking(strs, s3, mapping, row+1, col, sum+mapping[strs[row][col]], visited);
+	}
+	else
+	{
+		for(size_t i = 0; i <= 9; ++i)
+		{
+			if(visited[i]) continue;
+			mapping[strs[row][col]] = i;
+			visited[i] = true;
+			if(backTracking(strs, s3, mapping, row+1, col, sum+i, visited)) return true;
+			mapping[strs[row][col]] = 10; // means that the character has not been mapped in the mapping, i.e. the original second value is removed.
+			visited[i] = false;
+		}
+		return false;
+	}
+	return true;
 }
 
-bool verifySolution(const std::string &s1, const std::string &s2, const std::string &s3, const std::unordered_map<char, unsigned> &mapping)
+void reverseWord(std::array<std::string, 2> &strs, std::string &s3)
 {
-	return getStrNum(s1, mapping) + getStrNum(s2, mapping) == getStrNum(s3, mapping);
-}
-
-void backTracking(const std::string &s1, const std::string &s2, const std::string &s3, std::unordered_map<char, unsigned> &mapping, const std::unordered_set<char> &letters, std::unordered_set<char>::iterator itor, bool visited[10], bool &result)
-{ 
-	if(itor == letters.end())
+	/*
+	**	i.e.
+	**		POT, PAN, BIB
+	**		will be
+	**		TOP, NAP, BIB
+	*/
+	std::reverse(s3.begin(), s3.end());
+	for(size_t i = 0; i < strs.size(); ++i)
 	{
-		if(verifySolution(s1, s2, s3, mapping))
-			result = true;
-		return;
+		std::reverse(strs[i].begin(), strs[i].end());
 	}
-	for(unsigned i = 0; i <= 9; ++i)
-	{
-		if(visited[i] == true) continue;
-		mapping[*itor] = i;
-		visited[i] = true;
-		backTracking(s1, s2, s3, mapping, letters, std::next(itor), visited, result);
-		if(result) return;
-		visited[i] = false;
-	}
-}
-
-std::unordered_set<char> removeDuplcateChar(const std::string &s1, const std::string &s2, const std::string &s3)
-{
-	std::unordered_set<char> letters;
-	for(const auto &i : s1)
-		letters.insert(i);
-	for(const auto &i : s2)
-		letters.insert(i);
-	for(const auto &i : s3)
-		letters.insert(i);
-	return letters;
 }
 
 bool puzzleSolver(std::string s1, std::string s2, std::string s3, std::unordered_map<char, unsigned> &mapping)
 {
-	bool visited[10];
-	bool result = false;
-	const std::unordered_set<char> letters = removeDuplcateChar(s1, s2, s3);
+	bool visited[10]; // Note whether the number has been used in the mapping.
+	std::array<std::string, 2> strs = {s1, s2};
+	reverseWord(strs, s3);
 	for(size_t i = 0; i < 10; ++i)
-		visited[i] = 0;
-	backTracking(s1, s2, s3, mapping, letters, letters.begin(), visited, result);
-	return result;
+		visited[i] = false;
+	return backTracking(strs, s3, mapping, 0, 0, 0, visited);
 }
