@@ -3,15 +3,6 @@
 #include <array>
 #include <string>
 
-/*
-**		TOP
-**		NAP
-**		---
-**		BIB
-**		The processing order of the backtracking function should be from top to bottom.
-** 		whether T + N is equal to B, O + A is equal to I, and P + P is equal to B.
-**		So the traversal order should be T->N->B->O->A->I->P->P->B.
-*/
 void reverseWord(std::array<std::string, 2> &strs, std::string &s3)
 {
 	/*
@@ -27,6 +18,27 @@ void reverseWord(std::array<std::string, 2> &strs, std::string &s3)
 	}
 }
 
+unsigned getStrNum(const std::string &str, const std::unordered_map<char, unsigned> & mapping)
+{
+	if(str.empty()) return 0;
+	unsigned strNum = 0;
+	int exponent = str.size()-1;
+	for(const auto &i : str)
+	{
+		strNum = (strNum + mapping.at(i));
+		if(exponent--) strNum *= 10;
+	}
+	return strNum;
+}
+
+bool verifySolution(const std::string &s1, const std::string s2, const std::string &s3, const std::unordered_map<char, unsigned> &mapping)
+{
+	return getStrNum(s1, mapping) + getStrNum(s2, mapping) == getStrNum(s3, mapping);
+}
+
+/*
+**	When all the characters in s3 have been mapped, we need to check that the characters in s1 and s2 have also been mapped at the same time.
+*/
 bool isAnyCharLeft(const std::array<std::string, 2> &strs, std::unordered_map<char, unsigned> &mapping, bool visited[10])
 {
 	for(const auto &i : strs)
@@ -59,12 +71,14 @@ bool isAnyCharLeft(const std::array<std::string, 2> &strs, std::unordered_map<ch
 ** 		whether T + N is equal to B, O + A is equal to I, and P + P is equal to B.
 **		So the traversal order should be T->N->B->O->A->I->P->P->B.
 */
-bool backTracking(const std::array<std::string, 2> &strs, const std::string &s3, std::unordered_map<char, unsigned> &mapping, const unsigned &row, const unsigned &col, const unsigned &sum, bool visited[10])
+bool backTracking(std::array<std::string, 2> strs, std::string s3, std::unordered_map<char, unsigned> &mapping, const unsigned &row, const unsigned &col, const unsigned &sum, bool visited[10])
 {
 	if(col >= s3.size())
 	{
 		if(sum != 0) return false;
-		return isAnyCharLeft(strs, mapping, visited);
+		if(isAnyCharLeft(strs, mapping, visited)) return false;
+		reverseWord(strs, s3);
+		return verifySolution(strs[0], strs[1], s3, mapping);
 	}
 	if(row >= strs.size())
 	{

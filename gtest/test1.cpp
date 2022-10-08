@@ -46,7 +46,7 @@ TEST(SimpleCases, FirstNo){
     EXPECT_FALSE( p1 );
 }
 
-TEST(SimpleCases, First){
+TEST(SimpleCases, LeadingZeroCheck1){
         
     std::unordered_map<char, unsigned> puzzle;
         
@@ -54,7 +54,7 @@ TEST(SimpleCases, First){
     EXPECT_TRUE( p1 && gradeYesAnswer("AA", "BB", "AA", puzzle) );
 }
 
-TEST(SimpleCases, Second){
+TEST(SimpleCases, GeneralCheck1){
         
     std::unordered_map<char, unsigned> puzzle;
         
@@ -62,7 +62,7 @@ TEST(SimpleCases, Second){
     EXPECT_TRUE( p1 && gradeYesAnswer("UCI", "BE", "GOOD", puzzle) );
 }
 
-TEST(SimpleCases, Third){
+TEST(SimpleCases, GeneralCheck2){
         
     std::unordered_map<char, unsigned> puzzle;
         
@@ -70,7 +70,7 @@ TEST(SimpleCases, Third){
     EXPECT_TRUE( p1 && gradeYesAnswer("NBA", "NBA", "UGG", puzzle) );
 }
 
-TEST(SimpleCases, Fourth){
+TEST(SimpleCases, GeneralCheck3){
         
     std::unordered_map<char, unsigned> puzzle;
         
@@ -78,12 +78,36 @@ TEST(SimpleCases, Fourth){
     EXPECT_TRUE( p1 && gradeYesAnswer("CAT", "DOG", "PIG", puzzle) );
 }
 
-TEST(SimpleCases, Fifth){
+TEST(SimpleCases, SingleCharCheck){
         
     std::unordered_map<char, unsigned> puzzle;
         
     bool p1 = puzzleSolver("L", "O", "L", puzzle);
     EXPECT_TRUE( p1 && gradeYesAnswer("L", "O", "L", puzzle) );
+}
+
+TEST(SimpleCases, SuperLongStrCheck){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver(, puzzle);
+    EXPECT_TRUE( p1 && gradeYesAnswer("XBCBBDEFGD", "BEBXHFIEFJ", "DBGDJHIXFB", puzzle) );
+}
+
+TEST(SimpleCases, LeadingZeroCheck2){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("OORX", "CP", "AB", puzzle);
+    EXPECT_TRUE( p1 && gradeYesAnswer("OORX", "CP", "AB", puzzle) );
+}
+
+TEST(SimpleCases, SeconNo){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("ABCD", "DEFG", "HIJ", puzzle);
+    EXPECT_FALSE( p1 && gradeYesAnswer("ABCD", "DEFG", "HIJ", puzzle) );
 }
 
 } // end namespace

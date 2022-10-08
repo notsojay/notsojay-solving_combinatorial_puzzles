@@ -17,9 +17,13 @@
 
 void reverseWord(std::array<std::string, 2> &strs, std::string &s3);
 
+unsigned getStrNum(const std::string &str, const std::unordered_map<char, unsigned> &mapping);
+
+bool verifySolution(const std::string &s1, const std::string s2, const std::string &s3, const std::unordered_map<char, unsigned> &mapping);
+
 bool isAnyCharLeft(const std::array<std::string, 2> &strs, std::unordered_map<char, unsigned> &mapping, bool visited[10]);
 
-bool backTracking(const std::array<std::string, 2> &strs, const std::string &s3, std::unordered_map<char, unsigned> &mapping, const unsigned &row, const unsigned &col, const unsigned &sum, bool visited[10]);
+bool backTracking(std::array<std::string, 2> strs, std::string s3, std::unordered_map<char, unsigned> &mapping, const unsigned &row, const unsigned &col, const unsigned &sum, bool visited[10]);
 
 bool puzzleSolver(std::string s1, std::string s2, std::string s3, std::unordered_map<char, unsigned> &mapping);
 
