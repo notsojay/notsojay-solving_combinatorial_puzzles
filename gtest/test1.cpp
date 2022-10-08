@@ -46,4 +46,44 @@ TEST(SimpleCases, FirstNo){
     EXPECT_FALSE( p1 );
 }
 
+TEST(SimpleCases, First){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("AA", "BB", "AA", puzzle);
+    EXPECT_FALSE( p1 && gradeYesAnswer("AA", "BB", "AA", puzzle) );
+}
+
+TEST(SimpleCases, Second){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("UCI", "BE", "GOOD", puzzle);
+    EXPECT_FALSE( p1 && gradeYesAnswer("UCI", "BE", "GOOD", puzzle) );
+}
+
+TEST(SimpleCases, Third){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("NBA", "NBA", "UGG", puzzle);
+    EXPECT_FALSE( p1 && gradeYesAnswer("NBA", "NBA", "UGG", puzzle) );
+}
+
+TEST(SimpleCases, Fourth){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("CAT", "DOG", "PIG", puzzle);
+    EXPECT_FALSE( p1 && gradeYesAnswer("CAT", "DOG", "PIG", puzzle) );
+}
+
+TEST(SimpleCases, Fifth){
+        
+    std::unordered_map<char, unsigned> puzzle;
+        
+    bool p1 = puzzleSolver("L", "O", "L", puzzle);
+    EXPECT_FALSE( p1 && gradeYesAnswer("L", "O", "L", puzzle) );
+}
+
 } // end namespace

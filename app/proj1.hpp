@@ -13,9 +13,14 @@
  If the puzzle is NOT solvable, it is enough to return false.
 
  See the project 1 write-up for a better description. 
- */
+*/
+
+void reverseWord(std::array<std::string, 2> &strs, std::string &s3);
+
+bool isAnyCharLeft(const std::array<std::string, 2> &strs, std::unordered_map<char, unsigned> &mapping, bool visited[10]);
+
 bool backTracking(const std::array<std::string, 2> &strs, const std::string &s3, std::unordered_map<char, unsigned> &mapping, const unsigned &row, const unsigned &col, const unsigned &sum, bool visited[10]);
 
-bool puzzleSolver(std::string s1, std::string s2, std::string s3, std::unordered_map<char, unsigned> & mapping);
+bool puzzleSolver(std::string s1, std::string s2, std::string s3, std::unordered_map<char, unsigned> &mapping);
 
 #endif
