@@ -54,12 +54,12 @@ bool isAnyCharLeft(const std::array<std::string, 2> &strs, std::unordered_map<ch
 				}
 				else 
 				{
-					return false;
+					return true;
 				}
 			}
 		}
 	}
-	return true;
+	return false;
 }
 
 /*
