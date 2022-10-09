@@ -1,7 +1,4 @@
 #include "proj1.hpp"
-#include <unordered_map>
-#include <array>
-#include <string>
 
 void reverseWord(std::array<std::string, 2> &strs, std::string &s3)
 {
@@ -73,6 +70,7 @@ bool isAnyCharLeft(const std::array<std::string, 2> &strs, std::unordered_map<ch
 */
 bool backTracking(std::array<std::string, 2> strs, std::string s3, std::unordered_map<char, unsigned> &mapping, const unsigned &row, const unsigned &col, const unsigned &sum, bool visited[10])
 {
+	// Detect accuracy when all characters of s3 have been mapped.
 	if(col >= s3.size())
 	{
 		if(sum != 0) return false;

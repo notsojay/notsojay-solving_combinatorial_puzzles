@@ -98,7 +98,7 @@ TEST(SimpleCases, LeadingZeroCheck2){
         
     std::unordered_map<char, unsigned> puzzle;
         
-    bool p1 = puzzleSolver("OORX", "CP", "AB", puzzle);
+    bool p1 = puzzleSolver("OOOOOOOORX", "CP", "AB", puzzle);
     EXPECT_TRUE( p1 && gradeYesAnswer("OORX", "CP", "AB", puzzle) );
 }
 
