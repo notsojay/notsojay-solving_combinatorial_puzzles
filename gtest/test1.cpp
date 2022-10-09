@@ -90,7 +90,7 @@ TEST(SimpleCases, SuperLongStrCheck){
         
     std::unordered_map<char, unsigned> puzzle;
         
-    bool p1 = puzzleSolver(, puzzle);
+    bool p1 = puzzleSolver("XBCBBDEFGD", "BEBXHFIEFJ", "DBGDJHIXFB", puzzle);
     EXPECT_TRUE( p1 && gradeYesAnswer("XBCBBDEFGD", "BEBXHFIEFJ", "DBGDJHIXFB", puzzle) );
 }
 
