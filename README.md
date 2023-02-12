@@ -1,1 +1,2 @@
-# workspace
+## Solving Combinatorial Puzzles:
+In a summation puzzle, you are given three strings of the form POT + PAN = BIB. Typically each is a word, often with a theme to the three chosen. Your goal is to assign a distinct digit to each letter in the equation in order to make the resulting true. For example, if the puzzle is POT + PAN = BIB, the mapping P:2, O:3, T:1, A:7, N:4, B:5, I:0 will solve this, as 231 + 274 = 505.
